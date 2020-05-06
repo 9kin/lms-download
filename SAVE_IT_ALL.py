@@ -64,8 +64,14 @@ def save_task(solution, name):
         with open(os.path.join(DIR, name, solution.path), "wb") as file:
             file.write(code)
     else:
-        with open(os.path.join(DIR, name, solution.path), "w") as file:
-            file.write(code)
+        for enc in ['utf-8', 'windows-1252', 'windows-1250', 'ascii']:
+            try:
+                lesson.material = style + lesson.material.replace('\n', '')
+                with open(os.path.join(DIR, name, solution.path), "w", encoding=enc) as file:
+                    file.write(code)
+                break
+            except:
+                pass
 
 def save_material(lesson):
     for enc in ['utf-8', 'windows-1252', 'windows-1250', 'ascii']:
