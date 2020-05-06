@@ -59,14 +59,12 @@ def save_task(solution, name):
         os.mkdir(dir)
     code = solution.code
 
-
     if type(code) is bytes:
         with open(os.path.join(DIR, name, solution.path), "wb") as file:
             file.write(code)
     else:
         for enc in ['utf-8', 'windows-1252', 'windows-1250', 'ascii']:
             try:
-                lesson.material = style + lesson.material.replace('\n', '')
                 with open(os.path.join(DIR, name, solution.path), "w", encoding=enc) as file:
                     file.write(code)
                 break
